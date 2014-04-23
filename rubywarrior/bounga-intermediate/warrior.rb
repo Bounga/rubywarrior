@@ -1,3 +1,4 @@
+require 'pp'
 class Warrior
   DIRECTIONS    = [:forward, :left, :right, :backward].freeze
   CRITIC_HEALTH = 8.freeze
