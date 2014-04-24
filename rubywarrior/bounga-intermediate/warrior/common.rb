@@ -25,7 +25,10 @@ module Common
 
     def walk_avoiding_stairs!(direction)
       if warrior.feel(direction).stairs?
-        direction = :backward
+        direction = Constants::DIRECTIONS
+          .dup
+          .tap { |directions| directions.delete direction }
+          .find { |d| warrior.feel(d).empty? }
       end
 
       warrior.walk! direction
