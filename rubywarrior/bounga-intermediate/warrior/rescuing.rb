@@ -25,7 +25,7 @@ module Rescuing
 
       captive = captives.find { |c| c.to_s == "Captive" }
 
-      warrior.walk! warrior.direction_of(captive) if captive
+      walk_avoiding_stairs! warrior.direction_of(captive) if captive
     end
 
     def captives_nearby?

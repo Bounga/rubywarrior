@@ -9,7 +9,7 @@ module Resting
 
       if warrior.health <= Constants::CRITICAL_HEALTH
         if enemies_nearby?
-          warrior.walk! safe_space_direction
+          walk_avoiding_stairs! safe_space_direction
         else
           warrior.rest!
         end

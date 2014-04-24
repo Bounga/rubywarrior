@@ -23,6 +23,14 @@ module Common
       walk_to_stairs!
     end
 
+    def walk_avoiding_stairs!(direction)
+      if warrior.feel(direction).stairs?
+        direction = :backward
+      end
+
+      warrior.walk! direction
+    end
+
     def turn_finished?
       warrior.instance_variable_get("@action")
     end

@@ -38,17 +38,7 @@ module Fighting
     def walk_to_enemy!
       return if turn_finished?
 
-      # TODO: create a walk method that won't go through stairs
-      if enemies.any?
-        direction = if warrior.feel(warrior.direction_of(enemies.first)).stairs?
-          puts "OH NO STAIRS! Choosing another path"
-          :backward
-        else
-          warrior.direction_of(enemies.first)
-        end
-
-        warrior.walk! direction
-      end
+      walk_avoiding_stairs! warrior.direction_of(enemies.first) if enemies.any?
     end
 
     def bind_enemy!
