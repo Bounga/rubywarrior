@@ -34,6 +34,17 @@ module Common
       warrior.walk! direction
     end
 
+    def walk_avoiding_obstacles!(direction)
+      if warrior.feel(direction).stairs? || warrior.feel(direction).enemy?
+        direction = Constants::DIRECTIONS
+          .dup
+          .tap { |directions| directions.delete direction }
+          .find { |d| warrior.feel(d).empty? }
+      end
+
+      warrior.walk! direction
+    end
+
     def turn_finished?
       warrior.instance_variable_get("@action")
     end

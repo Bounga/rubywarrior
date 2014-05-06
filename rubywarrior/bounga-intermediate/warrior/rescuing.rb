@@ -23,16 +23,16 @@ module Rescuing
     def walk_to_captives!
       return if turn_finished?
 
-      captive = captives.find { |c| c.to_s == "Captive" }
+      captive = captives.sort(&:ticking?).find { |c| c.to_s == "Captive" }
 
       if captive
         direction = warrior.direction_of(captive)
 
-        if warrior.feel(direction).enemy?
+        if captives.none? { |captive| captive.ticking? } && warrior.feel(direction).enemy?
           # Captive guarded by an enemy
           warrior.attack! direction
         else
-          walk_avoiding_stairs! warrior.direction_of(captive)
+          walk_avoiding_obstacles! warrior.direction_of(captive)
         end
       end
     end
